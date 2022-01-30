@@ -90,3 +90,4 @@ combolist.forEach((combo, index)=>{
 	newcomb.name = (index+1).toString()
 	setVariant(newcomb, propList, combo)
 	positionSet(newcomb, index)
+}
