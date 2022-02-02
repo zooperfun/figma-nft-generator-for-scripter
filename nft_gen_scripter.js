@@ -6,13 +6,24 @@
 // Change 'max' to limit generated
 // Large numbers take a while to generate. Give some time.
 // Link to tutorial 
-const max = 100 // will set the max number
+const max = 10 // will set the max number
 const colnumb = 300 // will set number of columns
 
 
 //The code don't touch
-var selection = figma.currentPage.selection[0]
-var layers = selection.children
+let selection = figma.currentPage.selection[0]
+
+let layers = []
+let childs = selection.children
+
+childs.forEach((item) => {
+	if (
+		item.type == "INSTANCE" &&
+		item.mainComponent.parent.type == "COMPONENT_SET"
+	) {
+		layers.push(item);
+	}
+})
 
 
 function propertyFind(node){
@@ -24,7 +35,6 @@ function variantsFind(node, property){
 	let variants = node.mainComponent.parent.variantGroupProperties[property].values
 	return variants
 }
-
 
 var keyVariant = layers.map((item)=>{
 	let prop = propertyFind(item)
@@ -77,7 +87,17 @@ combolist = combolist.slice(0,max)
 let propList = keyVariant.map(item=>item[0])
 
 function setVariant(node, propList, combo){
-	let childs = node.children
+	let allchilds = node.children
+	let childs = []
+	allchilds.forEach((item) => {
+		if (
+			item.type == "INSTANCE" &&
+			item.mainComponent.parent.type == "COMPONENT_SET"
+		) {
+			childs.push(item)
+		}
+	})
+
 	childs.forEach((child, index)=>{
 		let prop = propList[index]
 		let variant = combo[index]
