@@ -1,7 +1,8 @@
 // INSTRUCTIONS
 // 1. create components variants for each layer you want
 // 2. Add your layers into a frame
-// 3. your instances need be directly under the frame. And should not have any other layers added
+// 3. Your instances need be directly under the frame. And should not have any other layers added
+// 4. Select the frame to duplicate.
 
 // Change 'max' to limit generated
 // Large numbers take a while to generate. Give some time.
